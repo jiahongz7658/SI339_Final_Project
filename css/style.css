@@ -1,0 +1,541 @@
+body {
+    background-color: #ffffff;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container {
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.title-container {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nav a, .dropbtn {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.nav a::after, .dropbtn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    bottom: -5px;
+    left: 0;
+    background: white;
+    transition: width 0.3s ease, left 0.3s ease, right 0.3s ease;
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+.dropbtn:hover::after {
+    width: 75%;
+    left: auto;
+    right: 0;
+}
+
+.nav a:hover, .dropbtn:hover {
+    transform: scale(1.1);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: #ffffff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.dropdown-content a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    left: 0;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.dropdown-content a:hover::after {
+    width: 100%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px 25px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    color: black;
+    text-align: justify;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: 0;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+.artist-rows {
+    padding: 0 20px;
+    margin: 20px auto;
+}
+
+.artist-row {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.artist-container {
+    text-align: center;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
+}
+
+.artist-container:hover {
+    transform: scale(1.1);
+}
+
+.artist-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 5px solid rgb(3, 3, 3);
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.artist-image:hover {
+    transform: scale(1.1);
+}
+
+.artist-container p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: black;
+}
+
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.album-container {
+    perspective: 1000px;
+    cursor: pointer;
+    width: 350px;
+    height: 500px;
+    transition: transform 0.3s ease-in-out, opacity 1s ease-in;
+    border: 2px solid black;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateY(100px); /* Start with a slight offset */
+}
+
+.album-container.animate {
+    opacity: 1;
+    transform: translateY(0); /* Restore position */
+}
+
+.album-container:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.album-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.album-container.flipped .album-content {
+    transform: rotateY(180deg);
+}
+
+.album-front, .album-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.album-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.album-back {
+    transform: rotateY(180deg);
+    color: #000000;
+}
+
+.album-title {
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #000000;
+    text-align: center;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent scrollbar */
+}
+
+.song-container {
+    width: 50%;
+    height: 100vh; /* Each song occupies the full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(100px); /* Start with a slight offset */
+}
+
+.song-container.active {
+    opacity: 1;
+    transform: translateY(0); /* Restore position */
+}
+
+.song-inner {
+    width: 100%;
+    height: 80%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-radius: 10px; /* Round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.song-inner:hover {
+    transform: scale(1.05); /* Enlarge on hover */
+}
+
+.song-container.flipped .song-inner {
+    transform: rotateY(180deg);
+}
+
+.song-front,
+.song-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.song-front {
+    background-color: #fff;
+}
+
+.song-back {
+    background-color: #fffcfc;
+    transform: rotateY(180deg);
+}
+
+.song-rank {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    margin-bottom: 5px; 
+}
+
+.song-image {
+    width: 70%;
+    height: auto;
+}
+
+.song-artist {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem; /* Increase font size */
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.song-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: rgb(0, 0, 0);
+    text-align: justify; /* Justify text for better readability */
+}
+
+.footer {
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.flipped .album-content {
+    transform: rotateY(180deg);
+}
+
+.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #111111;
+        color: #ffffff;
+    }
+
+    .header-container {
+        background-color: #1a1a1a;
+    }
+
+    .nav a, .dropbtn, .dropdown-content a {
+        color: #d4d4d4;
+    }
+
+    .about_me_container h2, .meaning h2, .artist h2{
+        color: #d4d4d4;
+    }
+
+    .dropdown-content {
+        background-color: #1a1a1a;
+    }
+
+    .about_me_container, .meaning, .artist {
+        background-color: rgba(44, 44, 44, 0.5);
+        color: #d4d4d4;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    }
+
+    .album-container {
+        border: 2px solid #d4d4d4;
+    }
+
+    .artist-container p {
+        color:#d4d4d4;
+
+    }
+
+    .artist-image{
+        border: 3px solid #d4d4d4;
+    }
+    
+    .album-info{
+        color:#d4d4d4;
+    }
+
+    .album-title {
+        color: #d4d4d4;
+    }
+
+    .song-front {
+        background-color: #181717;
+        border-radius: 10px;
+    }
+
+    .song-back {
+        background-color: #2a2a2a;
+    }
+
+    .song-rank, .song-artist {
+        color: #d4d4d4;
+    }
+
+    .song-description {
+        color: #ffffff;
+    }
+
+    .footer {
+        background-color: #1a1a1a;
+        color: #d4d4d4;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .nav a:hover, .dropbtn:hover {
+        transform: none;
+    }
+
+    .artist-container:hover {
+        transform: none;
+    }
+
+    .artist-image:hover {
+        transform: none;
+    }
+
+    .album-container:hover {
+        transform: none;
+    }
+
+    .song-inner:hover {
+        transform: none;
+    }
+
+
+    .album-container, .song-container {
+        transform: none;
+    }
+
+    .album-container.animate, .song-container.active {
+        transform: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block; 
+    }
+
+    
+    .album-container.flipped .album-content {
+        transform: rotateY(180deg);
+    }
+ 
+    .song-container.flipped .song-inner {
+        transform: rotateY(180deg);
+    }
+
+    .album-container, .song-container {
+        opacity: 1;
+        transform: none;
+    }
+
+    .album-container.animate, .song-container.active {
+        opacity: 1;
+        transform: none;
+    }
+
+    .album-content {
+        transition: none;
+    }
+    
+    .song-inner {
+        transition: none;
+    }
+}
